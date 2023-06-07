@@ -4,7 +4,19 @@ body {
     font-family: "Poppins"
   }
 
+.empty-message{
+    display:flex;
+    flex-direction: column;
+    opacity: 0.7;
+    align-items: center;
+}
 
+.empty-message img{
+    width: 400px;
+}
+.empty-message p{
+    text-align: center;
+}
   .container {  
     display: grid;
     grid-template-columns: 1fr 1fr;

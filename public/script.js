@@ -21,6 +21,7 @@ const defaultExercise = {
   ///////// 
 
 form.addEventListener("submit", function (event) {
+    console.log("submit button is clicked")
     event.preventDefault();
     addExercise(
         form.elements.date.value,
@@ -55,9 +56,6 @@ function addExercise(date, name, bodyPart, weight, reps, sets, rating) {
         rating ,
         id: Date.now()
     }
-
-// exercise.id has a value
-
     let workoutList = JSON.parse(localStorage.getItem('workoutList'))
     if (workoutList == null){
         workoutList = [exercise]
@@ -72,6 +70,7 @@ function addExercise(date, name, bodyPart, weight, reps, sets, rating) {
 }
 
 updateworkoutList();
+console.log(workoutList)
 
 // Call the function with test values for the input paramaters
 //addexercise("Initial Sketches", "Concept Ideation", 50, 5, "Google");
@@ -80,121 +79,123 @@ updateworkoutList();
 function updateworkoutList() {
     let list = document.querySelector("aside ul");
     list.innerHTML = "";
+    let emptyMessage = document.querySelector(".empty-message");
   
     // Retrieve the workoutList from local storage
     let workoutList = JSON.parse(localStorage.getItem("workoutList"));
-  
-    // Check if workoutList is not null
-    if (workoutList !== null) {
-      workoutList.forEach((exercise) => {
-        let card = document.createElement("div");
-        card.classList.add("card"); //give a class card
-        card.classList.add(`rating${exercise.rating}`);
 
-        //get appropriate emoji from the rating 
-        function getRatingEmoji(rating) {
-            switch(exercise.rating){
-                case "1":
-                    return "&#x1F622;"; // Emoji representation for rating 1
-                case "2":
-                    return "&#x1F641;"; // Emoji representation for rating 2
-                case "3":
-                    return "&#x1F610;"; // Emoji representation for rating 3
-                case "4":
-                    return "&#x1F642;"; // Emoji representation for rating 4
-                case "5":
-                    return "&#x1F60D;"; // Emoji representation for rating 5
+
+  
+    // Check if workoutList is not empty
+    if (workoutList.length > 0) {
+        emptyMessage.style.display = "none"; //hide the emptyMessage
+        workoutList.forEach((exercise) => {
+            let card = document.createElement("div");
+            card.classList.add("card"); //give a class card
+            card.classList.add(`rating${exercise.rating}`);
+
+            //get appropriate emoji from the rating 
+            function getRatingEmoji(rating) {
+                switch(exercise.rating){
+                    case "1":
+                        return "&#x1F622;"; // Emoji representation for rating 1
+                    case "2":
+                        return "&#x1F641;"; // Emoji representation for rating 2
+                    case "3":
+                        return "&#x1F610;"; // Emoji representation for rating 3
+                    case "4":
+                        return "&#x1F642;"; // Emoji representation for rating 4
+                    case "5":
+                        return "&#x1F60D;"; // Emoji representation for rating 5
+                }
             }
-        }
 
-        // match exercise.bodyPart with one image from Image folder
-        function getImage(bodyPart){
-            return `Images/${bodyPart}.png`;
-        }
-  
-        card.setAttribute('id', exercise.id);
-  
-        list.prepend(card);
-        card.innerHTML = `
-        <div class="initialInfo">
-            <div class="bodyPart">${exercise.bodyPart}</div>
-            <div class="date">${exercise.date}</div>
-            <button class="deleteButton"></button>
-        </div>
-        <div class="image"><img src = "${getImage(exercise.bodyPart)}" / ></div>
-        <div class="workoutName">${exercise.name}</div>
-        <div class="ratingEmoji">${getRatingEmoji(exercise.rating)}</div>
-        <div class="info">
-            <div class="weight">${exercise.weight} kg</div>
-            <div class="reps">${exercise.reps} reps</div>
-            <div class="sets">${exercise.sets} sets</div>
-         </div>`
+            // match exercise.bodyPart with one image from Image folder
+            function getImage(bodyPart){
+                return `Images/${bodyPart}.png`;
+            }
+    
+            card.setAttribute('id', exercise.id);
+    
+            list.prepend(card);
+            card.innerHTML = `
+            <div class="initialInfo">
+                <div class="bodyPart">${exercise.bodyPart}</div>
+                <div class="date">${exercise.date}</div>
+                <button class="deleteButton"></button>
+            </div>
+            <div class="image"><img src = "${getImage(exercise.bodyPart)}" / ></div>
+            <div class="workoutName">${exercise.name}</div>
+            <div class="ratingEmoji">${getRatingEmoji(exercise.rating)}</div>
+            <div class="info">
+                <div class="weight">${exercise.weight} kg</div>
+                <div class="reps">${exercise.reps} reps</div>
+                <div class="sets">${exercise.sets} sets</div>
+            </div>`
 
-        let delButton = document.createElement("button");
-        let delButtonText = document.createTextNode("×");
-        delButton.appendChild(delButtonText);
-        delButton.classList.add("deleteButton");
-        card.appendChild(delButton);
-  
-        // when the delete button is clicked, blur the card, and display a pop up message
-        delButton.addEventListener("click", function () {
-            console.log("delete button is clicked")
-            // Apply blur effect to the card
-            card.classList.add("blur");
+            let delButton = document.createElement("button");
+            let delButtonText = document.createTextNode("×");
+            delButton.appendChild(delButtonText);
+            delButton.classList.add("deleteButton");
+            card.appendChild(delButton);
+    
+            // when the delete button is clicked, blur the card, and display a pop up message
+            delButton.addEventListener("click", function () {
+                console.log("delete button is clicked")
+                // Apply blur effect to the card
+                card.classList.add("blur");
 
-            // Create the pop-up message elements
-            const popup = document.createElement("div");
-            popup.classList.add("popup");
+                // Create the pop-up message elements
+                const popup = document.createElement("div");
+                popup.classList.add("popup");
 
-            const message = document.createElement("div");
-            message.innerText = "Delete workout? You can't undo this.";
+                const message = document.createElement("div");
+                message.innerText = "Delete workout? You can't undo this.";
 
-            const cancelButton = document.createElement("button");
-            cancelButton.innerText = "Cancel";
-            cancelButton.classList.add("cancelButton");
+                const cancelButton = document.createElement("button");
+                cancelButton.innerText = "Cancel";
+                cancelButton.classList.add("cancelButton");
 
-            const secDeleteButton = document.createElement("button");
-            secDeleteButton.innerText = "Delete";
-            secDeleteButton.classList.add("secDeleteButton");
+                const secDeleteButton = document.createElement("button");
+                secDeleteButton.innerText = "Delete";
+                secDeleteButton.classList.add("secDeleteButton");
 
-            // Append the pop-up elements to the card
-            popup.appendChild(message);
-            popup.appendChild(cancelButton);
-            popup.appendChild(secDeleteButton);
-            card.appendChild(popup);
-            // Event listener for the cancel button
-            cancelButton.addEventListener("click", function () {
-                card.classList.remove("blur"); // Remove the blur effect
-                card.removeChild(popup); // Remove the pop-up message
-            });
+                // Append the pop-up elements to the card
+                popup.appendChild(message);
+                popup.appendChild(cancelButton);
+                popup.appendChild(secDeleteButton);
+                card.appendChild(popup);
+                // Event listener for the cancel button
+                cancelButton.addEventListener("click", function () {
+                    card.classList.remove("blur"); // Remove the blur effect
+                    card.removeChild(popup); // Remove the pop-up message
+                });
 
-            // Event listener for the delete button inside the pop-up message
-            secDeleteButton.addEventListener("click", function () {
-                // Remove the card from the DOM
-                card.remove();
+                // Event listener for the delete button inside the pop-up message
+                secDeleteButton.addEventListener("click", function () {
+                    // Remove the card from the DOM
+                    card.remove();
 
-                // Use the filter method to create a new array without the exercise to be deleted
-                workoutList = workoutList.filter((item) => item.id !== exercise.id);
+                    // Use the filter method to create a new array without the exercise to be deleted
+                    workoutList = workoutList.filter((item) => item.id !== exercise.id);
 
-                // Update the workoutList in the local storage
-                localStorage.setItem("workoutList", JSON.stringify(workoutList));
+                    // Update the workoutList in the local storage
+                    localStorage.setItem("workoutList", JSON.stringify(workoutList));
 
-                console.log("Deleted exercise:", exercise);
-                // Update the displayed list after deleting
-                  updateworkoutList();
-            });
-        //     // Use the filter method to create a new array without the exercise to be deleted
-        //   workoutList = workoutList.filter((item) => item.id !== exercise.id);
-  
-        //   // Update the workoutList in the local storage
-        //   localStorage.setItem("workoutList", JSON.stringify(workoutList));
-  
-        //   console.log("Deleted exercise:", exercise);
-  
-          // Update the displayed list after deleting
-        //   updateworkoutList();
-        });
-  
-      });
+                    console.log("Deleted exercise:", exercise);
+                    // Update the displayed list after deleting
+                    updateworkoutList();
+                });
+
+            }); //end of delete button event listener
+    
+        }); //ending of for eahc
+    } 
+    // Display message when no entry has been made
+    else {
+        emptyMessage.style.display = "flex"; //hide the emptyMessage
+
+     return;
     }
+    console.log(workoutList)
   }
