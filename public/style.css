@@ -1,23 +1,29 @@
 body {
     background-color: #484B56;
     color: white;
-    font-family: "Poppins"
   }
 
 /* header section */
 .header {
+    grid-area: header;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-h1{ font-size: 40px;}
+h1{ font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+font-weight: 900;}
+ul{
+    padding: 0;
+}
+
 .avatar {
-    width: 80px; /* Adjust the size of the avatar as needed */
+    width: 80px; 
     height: 80px;
     border-radius: 50%;
     overflow: hidden;
     right: 0px;
-  }
+}
   
 .avatar-image {
     width: 100%;
@@ -28,30 +34,33 @@ h1{ font-size: 40px;}
 
 h2{
     font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
 }
 
 
 .container {  
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 2.1fr 0.5fr;
+    grid-template-rows: 100px 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
         "header header"
-        "form list"
-        "footer footer";
+        "form list";
     margin: 81px 138px;
 }
 
-.header { grid-area: header;}
 
 /* left side of website */
 .form { 
+    font-family: 'Poppins', sans-serif;
     grid-area: form;
-    width: 518px;
+    width: calc(100% - 120px);
+    margin-right: 120px;
     display: flex;
-    flex-direction: column;}
+    flex-direction: column;
+    margin-right: 20px;}
 
 .form-row {
     display: flex;
@@ -66,11 +75,12 @@ h2{
 }
 .form-row input {
     text-align: center;
-}
-    
-.form-row input,
-.form-row select {
     width: 200px;
+}
+
+.form-row select {
+    width: 210px;
+    text-align: center;
 }
 
 input, select{
@@ -92,7 +102,8 @@ input, select{
   }
 #workout-rating label {
     font-size: 40px;
-    padding: 10px 20px 10px 20px;
+    padding: 5px 15px 5px 15px;
+    text-align: center;
     border-radius: 15px;
     margin-right: 10px;
     cursor: pointer;
@@ -102,6 +113,8 @@ input, select{
 
 /* right side of website */
 .empty-message{
+    font-family: "Poppins";
+    font-weight: 100;
     display:flex;
     flex-direction: column;
     opacity: 0.7;
@@ -115,29 +128,29 @@ input, select{
     text-align: center;
 }
 .list { grid-area: list;
-  width: 518px; }
+    width: calc(100% - 120px);}
   
 .footer { grid-area: footer; }
 
-.card {  
-  height: 151px;
-  width: 518px;
-  padding: 20px;
-  position: relative;
-  margin-bottom: 1rem;
-  box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
-  border-radius: 25px;
-  overflow: hidden;
-  transition: all 0.3s linear;
-  margin-left: -35px;
-  display: grid; 
-  grid-template-columns: 1.2fr 0.9fr 1fr; 
-  grid-template-rows: 0.2fr 2.3fr 0.5fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "initialInfo initialInfo deleteButton"
-    "workoutName rating image"
-    "info info image"; 
+.card {     
+    font-family: 'Poppins', sans-serif;
+    height: 151px;
+    max-width: 100%;
+    padding: 20px 20px 20px 40px;
+    position: relative;
+    margin-bottom: 1rem;
+    box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
+    border-radius: 25px;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    display: grid; 
+    grid-template-columns: 1.2fr 0.9fr 1fr; 
+    grid-template-rows: 0.2fr 2.3fr 0.5fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+        "initialInfo initialInfo deleteButton"
+        "workoutName rating image"
+        "info info image"; 
 }
 
 .deleteButton { grid-area: deleteButton; 
@@ -302,7 +315,118 @@ border-radius: 15px;
 
 .date { 
   color:white;
-  grid-area: date; }
+  grid-area: date;
+  font-family: 'Poppins', sans-serif;
+font-weight: 200; }
 
 
+@media (max-width: 600px){
+    h1{
+        font-size: 32px;
+    }
+    .avatar {
+        width: 40px; 
+        height: 40px;
+        border-radius: 50%;
+    }
 
+    .container {
+        grid-template-columns: 1fr; /* Change to a single column layout on mobile */
+        grid-template-areas:
+          "header"
+          "form"
+          "list";
+        margin: 59px 28px;
+    }           
+    .form{
+        margin: 0 auto;
+        display:block;
+        width: 330px;
+        font-size: 16px;
+    }
+    .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;}
+    
+    .form-row#name,
+    .form-row#bodyPart {
+        display: block;
+    }
+
+    .form-row#numerical input {
+    width: 70px;
+    }
+
+    .list{
+        margin: 0 auto;
+        display:block;
+        width: 330px;
+        font-size: 16px;
+    }
+
+    .card {
+        margin: 0 auto; 
+        border-radius:15px;  
+        padding: 15px 20px 15px 20px;
+        }
+    .date { 
+        font-size:12px;
+        text-align: left;
+    }
+    .bodyPart{
+        max-width: 80px;
+        font-size: 12px;
+    }
+    .workoutName{
+        font-size: 24px;
+    }
+    .ratingEmoji{
+        font-size: 40px;
+    }
+
+    .weight, .sets, .reps{
+        font-size: 12px;
+    }
+
+    .image { 
+        color:white;
+        grid-area: image; 
+        margin-top: -20px;
+      }
+      
+      .image img{
+        width: 80px;
+        height: auto;
+      }
+
+    .form label{
+        margin-right: 10px;
+        text-align: left;
+        flex: 1;
+    }
+    #date input, #name input, #bodyPart select{
+        width: 100%;
+    }
+    
+    .form-row select {
+        width: 210px;
+        text-align: center;
+    }
+
+    #workout-rating label {
+        font-size: 32px;
+        padding: 0px 5px 0px 5px;
+        text-align: center;
+        border-radius: 15px;
+        margin-right: 10px;
+        cursor: pointer;
+        background-color:rgb(212, 212, 212);
+    }
+
+    .submit{
+        width: 70%;
+    }
+
+}
