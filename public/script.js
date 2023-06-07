@@ -1,6 +1,5 @@
 const form = document.getElementById("workoutForm");
 const list = document.querySelector("aside ul");
-// const body = document.querySelector("body");
 const submitButton = document.getElementById("submit");
 const ratingInputs = document.querySelectorAll("#workout-rating input[type='radio']");
 
@@ -12,14 +11,13 @@ const defaultExercise = {
     weight: "10",
     reps: "15",
     sets: "3",
-  };
+};
   
-  console.log(defaultExercise.date);
-  // Set the default values on the form
-  document.getElementById("date").value = defaultExercise.date;
-  document.getElementById("weight").value = defaultExercise.weight;
-  document.getElementById("reps").value = defaultExercise.reps;
-  document.getElementById("sets").value = defaultExercise.sets;
+// Set the default values on the form
+document.getElementById("date").value = defaultExercise.date;
+document.getElementById("weight").value = defaultExercise.weight;
+document.getElementById("reps").value = defaultExercise.reps;
+document.getElementById("sets").value = defaultExercise.sets;
 
 
 //function occurs when the user rates their workout BEFORE clicking submit button
@@ -27,18 +25,18 @@ ratingInputs.forEach(function (input) {
     input.addEventListener("change", function () {
       const rating = form.elements.rating.value;
       const ratingLabels = document.querySelectorAll("#workout-rating label");
-  
-      ratingLabels.forEach(function (label) {
-        label.style.backgroundColor = ""; // Reset background color for all labels
-      });
+        //reset all labels' bkgd color
+        ratingLabels.forEach(function (label) {
+            label.style.backgroundColor = ""; 
+        });
       
       const selectedLabel = document.querySelector(`label[for=${this.id}]`);
       if (selectedLabel) {
+        // Change submit button background color and selected rating 
+        // background color based on the rating value
         switch (rating) {
           case "1":
-            //submit button changes color
             submitButton.style.backgroundColor = "#C45858";
-            // bkgd of selected rating changes color 
             selectedLabel.style.backgroundColor = "#C45858";
             break;
           case "2":
@@ -65,9 +63,9 @@ ratingInputs.forEach(function (input) {
     });
   });
   
-
+// Event listener for the form submission
 form.addEventListener("submit", function (event) {
-    console.log("submit button is clicked")
+    //console.log("submit button is clicked")
     event.preventDefault();
     addExercise(
         form.elements.date.value,
@@ -83,15 +81,10 @@ form.addEventListener("submit", function (event) {
 // Create an array called 'workoutList'
 var workoutList = [];
 
-// Create a function called 'addexercise'
-// Give the function input parameters for: name, type, rate, time, client
-// Paste your object definition from above in the function
-// Replace the property values with the input paramaters
-// Add the object to the workoutList array
-
+// Function to add an exercise to the workoutList array
 function addExercise(date, name, bodyPart, weight, reps, sets, rating) {
 
-    // Creating the object, directly passing in the input parameters
+    // Creating the exercise object with input parameters
     let exercise = {
         date,
         name,
@@ -102,29 +95,29 @@ function addExercise(date, name, bodyPart, weight, reps, sets, rating) {
         rating ,
         id: Date.now()
     }
+    // Retrieve the workoutList from local storage
     let workoutList = JSON.parse(localStorage.getItem('workoutList'))
+    // If workoutList is empty, workoutList's content becomes the exercise
     if (workoutList == null){
         workoutList = [exercise]
-        console.log(workoutList)
     } else {
+        // If workoutList is NOT empty, add the exercise to the existing array
         workoutList.push(exercise)    
     }
-
-
+    // Update the workoutList in local storage
     localStorage.setItem("workoutList", JSON.stringify(workoutList))
+    // Update the displayed workoutList in "Your Progress"
     updateworkoutList();
-    form.reset(); // Reset the form fields
-    // values are back to default values
+    // Reset the form fields to default values
+    form.reset();
     document.getElementById("date").value = defaultExercise.date;
     document.getElementById("weight").value = defaultExercise.weight;
     document.getElementById("reps").value = defaultExercise.reps;
     document.getElementById("sets").value = defaultExercise.sets;
 }
-
+// Initially display the workoutList when user goes on the website
 updateworkoutList();
-console.log(workoutList)
-
-
+// Function to update the displayed workoutList
 function updateworkoutList() {
     let list = document.querySelector("aside ul");
     list.innerHTML = "";
@@ -133,40 +126,39 @@ function updateworkoutList() {
     // Retrieve the workoutList from local storage
     let workoutList = JSON.parse(localStorage.getItem("workoutList"));
 
-
-  
     // Check if workoutList is not empty
     if (workoutList.length > 0) {
+        // If workoutList is NOT empty, hide the emptyMessage
         emptyMessage.style.display = "none"; //hide the emptyMessage
         workoutList.forEach((exercise) => {
             let card = document.createElement("div");
-            card.classList.add("card"); //give a class card
+            // Give a class "card" and "rating_"to the div element for styling
+            card.classList.add("card");
             card.classList.add(`rating${exercise.rating}`);
 
-            //get appropriate emoji from the rating 
+            // Function to get the appropriate emoji based on the rating 
             function getRatingEmoji(rating) {
                 switch(exercise.rating){
                     case "1":
-                        return "&#x1F622;"; // Emoji representation for rating 1
+                        return "&#x1F622;"; 
                     case "2":
-                        return "&#x1F641;"; // Emoji representation for rating 2
+                        return "&#x1F641;";
                     case "3":
-                        return "&#x1F610;"; // Emoji representation for rating 3
+                        return "&#x1F610;"; 
                     case "4":
-                        return "&#x1F642;"; // Emoji representation for rating 4
+                        return "&#x1F642;"; 
                     case "5":
-                        return "&#x1F60D;"; // Emoji representation for rating 5
+                        return "&#x1F60D;"; 
                 }
             }
 
-            // match exercise.bodyPart with one image from Image folder
+            // Function to get the appropriate image based on the selected bodyPart
             function getImage(bodyPart){
                 return `Images/${bodyPart}.png`;
             }
-    
             card.setAttribute('id', exercise.id);
-    
             list.prepend(card);
+            // Create the card HTML structure with exercise values
             card.innerHTML = `
             <div class="initialInfo">
                 <div class="bodyPart">${exercise.bodyPart}</div>
@@ -181,21 +173,21 @@ function updateworkoutList() {
                 <div class="reps">${exercise.reps} reps</div>
                 <div class="sets">${exercise.sets} sets</div>
             </div>`
-
+            //Create a delete button
             let delButton = document.createElement("button");
             let delButtonText = document.createTextNode("×");
             delButton.appendChild(delButtonText);
+            // Add a class to style the delete button
             delButton.classList.add("deleteButton");
             card.appendChild(delButton);
     
-            // when the delete button is clicked, blur the card, and display a pop up message
+            // Event listener for the delete button on each card
             delButton.addEventListener("click", function () {
-                console.log("delete button is clicked")
                 // Apply blur effect to the card
                 card.classList.add("blur");
-
-                // Create the pop-up message elements
+                // Create the pop-up message element
                 const popup = document.createElement("div");
+                // Add a class to style the popup element
                 popup.classList.add("popup");
 
                 const message = document.createElement("div");
@@ -214,10 +206,10 @@ function updateworkoutList() {
                 popup.appendChild(cancelButton);
                 popup.appendChild(secDeleteButton);
                 card.appendChild(popup);
+
                 // Event listener for the cancel button
                 cancelButton.addEventListener("click", function () {
                     card.classList.remove("blur"); // Remove the blur effect for desktop
-                    // body.classList.remove("screenBlur"); //Remove the blur effect for mobile
                     card.removeChild(popup); // Remove the pop-up message
                 });
 
@@ -226,26 +218,24 @@ function updateworkoutList() {
                     // Remove the card from the DOM
                     card.remove();
 
-                    // Use the filter method to create a new array without the exercise to be deleted
+                    // Create a new array while filtering out the deleted exercise
                     workoutList = workoutList.filter((item) => item.id !== exercise.id);
 
                     // Update the workoutList in the local storage
                     localStorage.setItem("workoutList", JSON.stringify(workoutList));
 
-                    console.log("Deleted exercise:", exercise);
-                    // Update the displayed list after deleting
+                    // Update the displayed workoutList
                     updateworkoutList();
                 });
 
-            }); //end of delete button event listener
+            }); 
     
-        }); //ending of for eahc
+        }); 
     } 
-    // Display message when no entry has been made
+    // Display emptyMessage when no exercise is added to workoutList
     else {
-        emptyMessage.style.display = "flex"; //hide the emptyMessage
+        emptyMessage.style.display = "flex";
 
      return;
     }
-    console.log(workoutList)
   }
