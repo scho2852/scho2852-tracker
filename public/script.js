@@ -97,17 +97,12 @@ function updateworkoutList() {
         card.setAttribute('id', exercise.id);
   
         list.prepend(card);
-  
-        let delButton = document.createElement("button");
-        let delButtonText = document.createTextNode("×");
-        delButton.appendChild(delButtonText);
-
         card.innerHTML = `
         <div class="initialInfo">
             <div class="bodyPart">${exercise.bodyPart}</div>
             <div class="date">${exercise.date}</div>
+            <button class="deleteButton">x</button>
         </div>
-        <div class = "deleteButton">x</div>
         <div class="image"><img src = "${getImage(exercise.bodyPart)}" / ></div>
         <div class="workoutName">${exercise.name}</div>
         <div class="ratingEmoji">${getRatingEmoji(exercise.rating)}</div>
@@ -116,9 +111,14 @@ function updateworkoutList() {
             <div class="reps">${exercise.reps} reps</div>
             <div class="sets">${exercise.sets} sets</div>
          </div>`
+
+        let delButton = document.createElement("button");
+        delButton.classList.add("deleteButton");
+        card.appendChild(delButton);
   
         // Listen for when the delete button is clicked
         delButton.addEventListener("click", function () {
+            console.log("delete button was clicked")
           // Use the filter method to create a new array without the exercise to be deleted
           workoutList = workoutList.filter((item) => item.id !== exercise.id);
   
