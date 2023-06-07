@@ -23,40 +23,45 @@ document.getElementById("sets").value = defaultExercise.sets;
 //function occurs when the user rates their workout BEFORE clicking submit button
 ratingInputs.forEach(function (input) {
     input.addEventListener("change", function () {
-      const rating = form.elements.rating.value;
-      const ratingLabels = document.querySelectorAll("#workout-rating label");
-        //reset all labels' bkgd color
-        ratingLabels.forEach(function (label) {
-            label.style.backgroundColor = ""; 
-        });
-      
+        const rating = form.elements.rating.value;
+        const ratingLabels = document.querySelectorAll("#workout-rating label");
+            // Reset all labels' bkgd color
+            ratingLabels.forEach(function (label) {
+                label.style.backgroundColor = ""; 
+            });
+          
       const selectedLabel = document.querySelector(`label[for=${this.id}]`);
       if (selectedLabel) {
         // Change submit button background color and selected rating 
         // background color based on the rating value
+        // Reset the color of rating labels and submit button
+            
+
         switch (rating) {
           case "1":
             submitButton.style.backgroundColor = "#C45858";
+            submitButton.style.color = "white";
             selectedLabel.style.backgroundColor = "#C45858";
             break;
           case "2":
             submitButton.style.backgroundColor = "#8684D7";
             selectedLabel.style.backgroundColor = "#8684D7";
+            submitButton.style.color = "white";
             break;
           case "3":
             submitButton.style.backgroundColor = "#8FB8DE";
             selectedLabel.style.backgroundColor = "#8FB8DE";
+            submitButton.style.color = "white";
             break;
           case "4":
             submitButton.style.backgroundColor = "#E0B82B";
             selectedLabel.style.backgroundColor = "#E0B82B";
+            submitButton.style.color = "white";
             break;
           case "5":
             submitButton.style.backgroundColor = "#5FB563";
             selectedLabel.style.backgroundColor = "#5FB563";
-            break;
-          default:
-            submitButton.style.backgroundColor = "";
+            submitButton.style.color = "white";
             break;
         }
       }
@@ -76,6 +81,18 @@ form.addEventListener("submit", function (event) {
         form.elements.sets.value,
         form.elements.rating.value,
     )
+
+    // Reset color of workout-rating label and submit button
+    const ratingLabels = document.querySelectorAll("#workout-rating label");
+    function resetColor() {
+        ratingLabels.forEach((label) => {
+            label.style.backgroundColor = "";
+        });
+        submitButton.style.backgroundColor = "";
+        submitButton.style.color = "";
+    }
+
+    resetColor();
 })
 
 // Create an array called 'workoutList'

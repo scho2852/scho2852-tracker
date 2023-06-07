@@ -420,6 +420,7 @@ font-weight: 200; }
     }
 
     #workout-rating label {
+        
         font-size: 32px;
         padding: 0px 5px 0px 5px;
         text-align: center;
@@ -430,14 +431,8 @@ font-weight: 200; }
     }
 
     .submit{
-        width: 70%;
+        width: 90%;
     }
-
-    body.screenBlur > *:not(.popup){
-        filter: blur(3px);
-    }
-
-    
     .popup{
         max-height:70px;
         width: 200px;
