@@ -1,5 +1,6 @@
 const form = document.getElementById("workoutForm");
 const list = document.querySelector("aside ul");
+// const body = document.querySelector("body");
 const submitButton = document.getElementById("submit");
 const ratingInputs = document.querySelectorAll("#workout-rating input[type='radio']");
 
@@ -190,6 +191,7 @@ function updateworkoutList() {
             delButton.addEventListener("click", function () {
                 console.log("delete button is clicked")
                 // Apply blur effect to the card
+                body.classList.add("screenBlur");
                 card.classList.add("blur");
 
                 // Create the pop-up message elements
@@ -214,7 +216,8 @@ function updateworkoutList() {
                 card.appendChild(popup);
                 // Event listener for the cancel button
                 cancelButton.addEventListener("click", function () {
-                    card.classList.remove("blur"); // Remove the blur effect
+                    card.classList.remove("blur"); // Remove the blur effect for desktop
+                    // body.classList.remove("screenBlur"); //Remove the blur effect for mobile
                     card.removeChild(popup); // Remove the pop-up message
                 });
 
