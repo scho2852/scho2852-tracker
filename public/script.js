@@ -111,13 +111,16 @@ function addExercise(date, name, bodyPart, weight, reps, sets, rating) {
 
     localStorage.setItem("workoutList", JSON.stringify(workoutList))
     updateworkoutList();
+    form.reset(); // Reset the form fields
+    // values are back to default values
+    document.getElementById("date").value = defaultExercise.date;
+    document.getElementById("weight").value = defaultExercise.weight;
+    document.getElementById("reps").value = defaultExercise.reps;
+    document.getElementById("sets").value = defaultExercise.sets;
 }
 
 updateworkoutList();
 console.log(workoutList)
-
-// Call the function with test values for the input paramaters
-//addexercise("Initial Sketches", "Concept Ideation", 50, 5, "Google");
 
 
 function updateworkoutList() {
@@ -194,7 +197,7 @@ function updateworkoutList() {
                 popup.classList.add("popup");
 
                 const message = document.createElement("div");
-                message.innerText = "Delete workout? You can't undo this.";
+                message.innerText = "Delete workout?\n You can't undo this.";
 
                 const cancelButton = document.createElement("button");
                 cancelButton.innerText = "Cancel";
