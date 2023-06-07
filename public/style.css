@@ -74,9 +74,43 @@ input, select{
     background-color: transparent;  
 }
 
+.card.blur > *:not(.popup) {
+    filter: blur(3px); /* Apply blur only to the card elements excluding the pop-up message */
+}
 
+.card .popup {
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+    z-index: 1; /* Ensure the pop-up message is displayed on top */
+    filter: none; /* Remove the blur effect from the pop-up message */
+}
 
+  
+.popup button.cancelButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    color: inherit;
+  }
 
+.popup button.secDeleteButton {
+background-color: rgb(200, 28, 28);
+border: none;
+cursor: pointer;
+font-size: 20px;
+padding: 10px 20px;
+color: white;
+border-radius: 5px;
+}
+    
 .rating1{
     background-color: #C45858;
     color: #C45858;

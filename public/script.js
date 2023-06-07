@@ -2,6 +2,26 @@
 const form = document.getElementById("workoutForm");
 const list = document.querySelector("aside ul");
 
+//prefilm the form
+// Pre-fill the form with default values
+// grab the date the user uses the website
+const currentDate = new Date().toISOString().split('T')[0];
+
+const defaultExercise = {
+    date: currentDate,
+    weight: "10",
+    reps: "15",
+    sets: "3",
+  };
+  
+  // Set the default values to the form elements
+  document.getElementById("date").value = defaultExercise.date;
+  document.getElementById("weight").value = defaultExercise.weight;
+  document.getElementById("reps").value = defaultExercise.reps;
+  document.getElementById("sets").value = defaultExercise.sets;
+
+  ///////// 
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     addExercise(
@@ -101,7 +121,7 @@ function updateworkoutList() {
         <div class="initialInfo">
             <div class="bodyPart">${exercise.bodyPart}</div>
             <div class="date">${exercise.date}</div>
-            <button class="deleteButton">x</button>
+            <button class="deleteButton"></button>
         </div>
         <div class="image"><img src = "${getImage(exercise.bodyPart)}" / ></div>
         <div class="workoutName">${exercise.name}</div>
@@ -113,22 +133,68 @@ function updateworkoutList() {
          </div>`
 
         let delButton = document.createElement("button");
+        let delButtonText = document.createTextNode("×");
+        delButton.appendChild(delButtonText);
         delButton.classList.add("deleteButton");
         card.appendChild(delButton);
   
-        // Listen for when the delete button is clicked
+        // when the delete button is clicked, blur the card, and display a pop up message
         delButton.addEventListener("click", function () {
-            console.log("delete button was clicked")
-          // Use the filter method to create a new array without the exercise to be deleted
-          workoutList = workoutList.filter((item) => item.id !== exercise.id);
+            console.log("delete button is clicked")
+            // Apply blur effect to the card
+            card.classList.add("blur");
+
+            // Create the pop-up message elements
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+
+            const message = document.createElement("div");
+            message.innerText = "Delete workout? You can't undo this.";
+
+            const cancelButton = document.createElement("button");
+            cancelButton.innerText = "Cancel";
+            cancelButton.classList.add("cancelButton");
+
+            const secDeleteButton = document.createElement("button");
+            secDeleteButton.innerText = "Delete";
+            secDeleteButton.classList.add("secDeleteButton");
+
+            // Append the pop-up elements to the card
+            popup.appendChild(message);
+            popup.appendChild(cancelButton);
+            popup.appendChild(secDeleteButton);
+            card.appendChild(popup);
+            // Event listener for the cancel button
+            cancelButton.addEventListener("click", function () {
+                card.classList.remove("blur"); // Remove the blur effect
+                card.removeChild(popup); // Remove the pop-up message
+            });
+
+            // Event listener for the delete button inside the pop-up message
+            secDeleteButton.addEventListener("click", function () {
+                // Remove the card from the DOM
+                card.remove();
+
+                // Use the filter method to create a new array without the exercise to be deleted
+                workoutList = workoutList.filter((item) => item.id !== exercise.id);
+
+                // Update the workoutList in the local storage
+                localStorage.setItem("workoutList", JSON.stringify(workoutList));
+
+                console.log("Deleted exercise:", exercise);
+                // Update the displayed list after deleting
+                  updateworkoutList();
+            });
+        //     // Use the filter method to create a new array without the exercise to be deleted
+        //   workoutList = workoutList.filter((item) => item.id !== exercise.id);
   
-          // Update the workoutList in the local storage
-          localStorage.setItem("workoutList", JSON.stringify(workoutList));
+        //   // Update the workoutList in the local storage
+        //   localStorage.setItem("workoutList", JSON.stringify(workoutList));
   
-          console.log("Deleted exercise:", exercise);
+        //   console.log("Deleted exercise:", exercise);
   
           // Update the displayed list after deleting
-          updateworkoutList();
+        //   updateworkoutList();
         });
   
       });
