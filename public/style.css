@@ -144,7 +144,7 @@ input, select{
     box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
     border-radius: 25px;
     overflow: hidden;
-    transition: all 1s linear;
+    transition: filter 0.8s ease;
     display: grid; 
     grid-template-columns: 1.2fr 0.9fr 1fr; 
     grid-template-rows: 0.2fr 2.3fr 0.5fr; 
@@ -167,7 +167,7 @@ input, select{
 }
 
 .card.blur > *:not(.popup) {
-    filter: blur(3px); /* Apply blur only to the card elements excluding the pop-up message */
+    filter: blur(5px); /* Apply blur only to the card elements excluding the pop-up message */
 }
 
 .card .popup {
@@ -322,8 +322,8 @@ font-weight: 200; }
         font-size: 32px;
     }
     .avatar {
-        width: 40px; 
-        height: 40px;
+        width: 50px; 
+        height: 50px;
         border-radius: 50%;
     }
 
