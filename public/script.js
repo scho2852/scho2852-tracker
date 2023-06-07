@@ -192,7 +192,6 @@ function updateworkoutList() {
             delButton.addEventListener("click", function () {
                 console.log("delete button is clicked")
                 // Apply blur effect to the card
-                body.classList.add("screenBlur");
                 card.classList.add("blur");
 
                 // Create the pop-up message elements
