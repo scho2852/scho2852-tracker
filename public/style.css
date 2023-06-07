@@ -129,6 +129,7 @@ input, select{
     text-align: center;
 }
 .list { grid-area: list;
+    margin-left:120px;
     width: calc(100% - 120px);}
   
 .footer { grid-area: footer; }
