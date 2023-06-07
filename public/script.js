@@ -14,7 +14,8 @@ const defaultExercise = {
     sets: "3",
   };
   
-  // Set the default values to the form elements
+  console.log(defaultExercise.date);
+  // Set the default values on the form
   document.getElementById("date").value = defaultExercise.date;
   document.getElementById("weight").value = defaultExercise.weight;
   document.getElementById("reps").value = defaultExercise.reps;

@@ -96,7 +96,9 @@ input, select{
 }
 
 /* rating section */
-
+#workout-rating{
+    width: 100%;
+}
 #workout-rating input[type="radio"] {
     display: none;
   }
@@ -348,8 +350,8 @@ font-weight: 200; }
         justify-content: space-between;
         margin-bottom: 5px;}
     
-    .form-row#name,
-    .form-row#bodyPart {
+    .form-row#name-row,
+    .form-row#bodyPart-row {
         display: block;
     }
 
@@ -408,7 +410,7 @@ font-weight: 200; }
         text-align: left;
         flex: 1;
     }
-    #date input, #name input, #bodyPart select{
+    #date-row input, #name-row input, #bodyPart-row select{
         width: 100%;
     }
     
