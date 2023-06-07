@@ -1,13 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi</title>
-</head>
-<body>
-    <h1>hello</h1>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SweatTracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>SweatTracker</h1>
+            </div>
+            <div class="form">
+                <h2>Enter Your Workout</h2>
+                <form id="workoutForm">
+                    <div class="form-row">
+                        <label for="date">Date</label>
+                        <input type = "date" id="date" name = "date" required="false">
+                    </div>
+                    <div class="form-row">
+                        <label for="name">Exercise Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            required="false"
+                        >
+                    </div>
+                    <div class="form-row">
+                        <label for="bodyPart">Body Part</label>
+                        <select id="bodyPart" name="bodyPart" required="false">
+                            <option value="">Select one</option>
+                            <option value="Arms">Arms</option>
+                            <option value="Back">Back</option>
+                            <option value="Chest">Chest</option>
+                            <option value="Core">Core</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Shoulders">Shoulders</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="weight">Weight(kg)</label>
+                        <input
+                            type="number"
+                            name="weight"
+                            id="weight"
+                            required="false"
+                        >
+                    </div>
+                    <div class="form-row">
+                        <label for="reps">Number of Repetitions</label>
+                        <input
+                            type="number"
+                            name="reps"
+                            id="reps"
+                            required="false"
+                        >
+                    </div>
+                    <div class="form-row">
+                        <label for="sets">Number of Sets</label>
+                        <input
+                            type="number"
+                            name="sets"
+                            id="sets"
+                            required="false"
+                        >
+                    </div>
+                    <div class = "form-row">
+                        <label for="rating">How did you like your workout?</label>
+                        <label for="workout-rating">Workout Rating:</label>
+                        <div id="workout-rating">
+                            <input type="radio" id="rating1" name="rating" value="1">
+                            <label for="rating1">&#x1F622;</label>
+                            <input type="radio" id="rating2" name="rating" value="2">
+                            <label for="rating2">&#x1F641;</label>
+                            <input type="radio" id="rating3" name="rating" value="3">
+                            <label for="rating3">&#x1F610;</label>
+                            <input type="radio" id="rating4" name="rating" value="4">
+                            <label for="rating4">&#x1F642;</label>
+                            <input type="radio" id="rating5" name="rating" value="5">
+                            <label for="rating5">&#x1F60D;</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="list">
+                <aside class="aside">
+                    <div class = "aside-container">
+                        <h2>Your Progress</h2>
+                        <ul><!-- new task is added here--> </ul>
+                        </div></aside>
+            </div>
+            <div class="footer"></div>
+          </div>
+
+
+        <script src="newscript.js"></script>
+    </body>
 </html>
