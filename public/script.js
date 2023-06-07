@@ -2,11 +2,9 @@
 const form = document.getElementById("workoutForm");
 const list = document.querySelector("aside ul");
 
-//prefilm the form
-// Pre-fill the form with default values
+// pre-fill the form with default values
 // grab the date the user uses the website
 const currentDate = new Date().toISOString().split('T')[0];
-
 const defaultExercise = {
     date: currentDate,
     weight: "10",
