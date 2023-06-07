@@ -29,6 +29,55 @@ h1{ font-size: 40px;}
 h2{
     font-size: 24px;
 }
+
+
+.container {  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 2.1fr 0.5fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "header header"
+        "form list"
+        "footer footer";
+    margin: 81px 138px;
+}
+
+.header { grid-area: header;}
+
+/* left side of website */
+.form { 
+    grid-area: form;
+    width: 518px;}
+
+input, select{
+  font-size:16px;
+}
+
+#workoutForm{
+    background-color: white;
+    border-radius: 25px;
+    color: black;
+    padding: 25px;
+    line-height: 2.5;
+}
+
+/* rating section */
+#workout-rating input[type="radio"] {
+    display: none;
+  }
+#workout-rating label {
+    font-size: 40px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color:rgb(212, 212, 212);
+}
+
+
+/* right side of website */
 .empty-message{
     display:flex;
     flex-direction: column;
@@ -42,42 +91,10 @@ h2{
 .empty-message p{
     text-align: center;
 }
-  .container {  
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 2.1fr 0.5fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "header header"
-      "form list"
-      "footer footer";
-    margin: 81px 138px;
-  }
-  
-  .header { grid-area: header;
-    /* padding: 81px 138px; } */}
-  
-  .form { grid-area: form;
-    width: 518px; 
-    /* margin-left: 138px;
-    margin-right: 138px;} */}
-
-input, select{
-  font-size:16px;
-}
-
-  #workoutForm{
-    background-color: white;
-    border-radius: 25px;
-    color: black;
-    padding: 25px;
-    line-height: 2.5;
-  }
-  .list { grid-area: list;
+.list { grid-area: list;
   width: 518px; }
   
-  .footer { grid-area: footer; }
+.footer { grid-area: footer; }
 
 .card {  
   height: 151px;
@@ -177,6 +194,14 @@ border-radius: 5px;
   padding: 20px;
   font-size: 20px;
   border-radius: 15px;  
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  background-color: rgb(212, 212, 212);
+}
+
+.submit:hover{
+    cursor: pointer;
 }
 
 

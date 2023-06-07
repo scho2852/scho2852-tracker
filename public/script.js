@@ -19,34 +19,50 @@ const defaultExercise = {
   document.getElementById("reps").value = defaultExercise.reps;
   document.getElementById("sets").value = defaultExercise.sets;
 
-// change submit button's color accordingly to user's rating
-const defaultButtonColor = "#ffffff"; 
+
 //function occurs when the user rates their workout BEFORE clicking submit button
 ratingInputs.forEach(function (input) {
     input.addEventListener("change", function () {
       const rating = form.elements.rating.value;
-      switch (rating) {
-        case "1":
-          submitButton.style.backgroundColor = "#C45858";
-          break;
-        case "2":
-          submitButton.style.backgroundColor = "#8684D7";
-          break;
-        case "3":
-          submitButton.style.backgroundColor = "#8FB8DE";
-          break;
-        case "4":
-          submitButton.style.backgroundColor = "#E0B82B";
-          break;
-        case "5":
-          submitButton.style.backgroundColor = "#5FB563";
-          break;
-        default:
-          submitButton.style.backgroundColor = "";
-          break;
+      const ratingLabels = document.querySelectorAll("#workout-rating label");
+  
+      ratingLabels.forEach(function (label) {
+        label.style.backgroundColor = ""; // Reset background color for all labels
+      });
+      
+      const selectedLabel = document.querySelector(`label[for=${this.id}]`);
+      if (selectedLabel) {
+        switch (rating) {
+          case "1":
+            //submit button changes color
+            submitButton.style.backgroundColor = "#C45858";
+            // bkgd of selected rating changes color 
+            selectedLabel.style.backgroundColor = "#C45858";
+            break;
+          case "2":
+            submitButton.style.backgroundColor = "#8684D7";
+            selectedLabel.style.backgroundColor = "#8684D7";
+            break;
+          case "3":
+            submitButton.style.backgroundColor = "#8FB8DE";
+            selectedLabel.style.backgroundColor = "#8FB8DE";
+            break;
+          case "4":
+            submitButton.style.backgroundColor = "#E0B82B";
+            selectedLabel.style.backgroundColor = "#E0B82B";
+            break;
+          case "5":
+            submitButton.style.backgroundColor = "#5FB563";
+            selectedLabel.style.backgroundColor = "#5FB563";
+            break;
+          default:
+            submitButton.style.backgroundColor = "";
+            break;
+        }
       }
     });
   });
+  
 
 form.addEventListener("submit", function (event) {
     console.log("submit button is clicked")
