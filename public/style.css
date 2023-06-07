@@ -4,6 +4,31 @@ body {
     font-family: "Poppins"
   }
 
+/* header section */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+h1{ font-size: 40px;}
+.avatar {
+    width: 80px; /* Adjust the size of the avatar as needed */
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    right: 0px;
+  }
+  
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+h2{
+    font-size: 24px;
+}
 .empty-message{
     display:flex;
     flex-direction: column;

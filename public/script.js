@@ -1,9 +1,10 @@
-// Setting up variables for our HTML elements using DOM selection
 const form = document.getElementById("workoutForm");
 const list = document.querySelector("aside ul");
+const submitButton = document.getElementById("submit");
+const ratingInputs = document.querySelectorAll("#workout-rating input[type='radio']");
+
 
 // pre-fill the form with default values
-// grab the date the user uses the website
 const currentDate = new Date().toISOString().split('T')[0];
 const defaultExercise = {
     date: currentDate,
@@ -18,7 +19,34 @@ const defaultExercise = {
   document.getElementById("reps").value = defaultExercise.reps;
   document.getElementById("sets").value = defaultExercise.sets;
 
-  ///////// 
+// change submit button's color accordingly to user's rating
+const defaultButtonColor = "#ffffff"; 
+//function occurs when the user rates their workout BEFORE clicking submit button
+ratingInputs.forEach(function (input) {
+    input.addEventListener("change", function () {
+      const rating = form.elements.rating.value;
+      switch (rating) {
+        case "1":
+          submitButton.style.backgroundColor = "#C45858";
+          break;
+        case "2":
+          submitButton.style.backgroundColor = "#8684D7";
+          break;
+        case "3":
+          submitButton.style.backgroundColor = "#8FB8DE";
+          break;
+        case "4":
+          submitButton.style.backgroundColor = "#E0B82B";
+          break;
+        case "5":
+          submitButton.style.backgroundColor = "#5FB563";
+          break;
+        default:
+          submitButton.style.backgroundColor = "";
+          break;
+      }
+    });
+  });
 
 form.addEventListener("submit", function (event) {
     console.log("submit button is clicked")
