@@ -246,10 +246,6 @@ border-radius: 5px;
 .submit:hover{
     cursor: pointer;
 }
-
-
-
-
 .image { 
   grid-area: image; 
   margin-top: -20px;
@@ -418,16 +414,19 @@ font-weight: 200; }
         width: 210px;
         text-align: center;
     }
+    #workout-rating{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
 
     #workout-rating label {
-        
+        display: inline-block;
         font-size: 32px;
         padding: 0px 5px 0px 5px;
-        text-align: center;
         border-radius: 15px;
-        margin-right: 10px;
-        cursor: pointer;
-        background-color:rgb(212, 212, 212);
+        margin-right: 10px;;
     }
 
     .submit{
@@ -436,6 +435,12 @@ font-weight: 200; }
     .popup{
         max-height:70px;
         width: 200px;
+    }
+
+    .deleteButton{
+        display: absolute;
+        right: -10px;
+        top: -10px;
     }
 
     
